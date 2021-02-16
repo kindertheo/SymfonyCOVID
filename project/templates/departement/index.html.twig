@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DepartementController!{% endblock %}
+
+{% block body %}
+
+<div class="container pt-5 ">
+    <h1 class="pb-5">{{ departement }}</h1>
+
+    <div class="card mb-5 shadow-lg">
+        <div class="card-body">
+            {{ render_chart(chartNvlHospitRea)}}
+        </div>
+    </div>
+
+    <div class="card mb-5 shadow-lg">
+        <div class="card-body">
+            {{ render_chart(chartDecesGueris)}}
+        </div>
+    </div>
+
+        <div class="card mb-5 shadow-lg">
+        <div class="card-body">
+            {{ render_chart(chartHospitRea)}}
+        </div>
+    </div>
+
+    <p>Données récupérées grâce à <a href="https://github.com/florianzemma/CoronavirusAPI-France">CoronavirusAPI-France</a><p> 
+</div>
+{% endblock %}

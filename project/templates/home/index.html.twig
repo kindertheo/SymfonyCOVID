@@ -1,0 +1,172 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<div class="py-5 pays">
+    <h1>Les chiffres du COVID-19 en France</h1>
+    <div class="container">
+    <p>Données cumulées depuis le début de l'épidémie.</p>
+        <div class="row">
+            <div class="col-lg-6 col-sm-12">
+                <div class="card-body">
+                    <h5 class="card-title">Nombre de cas confirmés</h5>
+                    <p class="card-footer bg-warning">{{ data.france.0.casConfirmes }}</p>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+                <div class="card-body">
+                    <h5 class="card-title">Nombre d'hospitalisations</h5>
+                    <p class="card-footer bg-warning">{{ data.france.0.hospitalises }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 col-sm-12">
+                <div class="card-body">
+                    <h5 class="card-title">Nombre de décès</h5>
+                    <p class="card-footer bg-danger">{{ data.france.0.deces }}</p>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+                <div class="card-body">
+                    <h5 class="card-title">Nombre de décès EHPAD</h5>
+                    <p class="card-footer bg-danger">{{ data.france.0.decesEhpad }}</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-6 col-sm-12">
+                <div class="card-body">
+                    <h5 class="card-title">Nombre de guéris</h5>
+                    <p class="card-footer bg-success">{{ data.france.0.gueris }}</p>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+                <div class="card-body">
+                    <h5 class="card-title">Nombre de réanimations</h5>
+                    <p class="card-footer bg-success">{{ data.france.0.reanimation }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 col-sm-12">
+                <div class="card-body">
+                    <h5 class="card-title">Nombre de nouvelles hospitalisations</h5>
+                    <p class="card-footer bg-info">{{ data.france.0.nouvellesHospitalisations }}</p>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+                <div class="card-body">
+                    <h5 class="card-title">Nombre de nouvelles réanimations</h5>
+                    <p class="card-footer bg-info">{{ data.france.0.nouvellesReanimations }}</p>
+                </div>
+            </div>
+        </div>    
+    </div>
+
+    <hr>
+
+    <div class="container">
+        <h2 id="region">Régions</h2>
+        <div class="row">
+            {% for region in data.regions %}
+            <div class="col-lg-6 col-sm-12">
+                <div class="card-body region">
+                    <h5 class="card-title">{{ region.nom }}</h5>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>Hospitalisations</td>
+                                <td>{{ region.hospitalises }}</td>
+                            </tr>
+
+                            <tr>
+                                <td>Décès</td>
+                                <td>{{ region.deces }}</td>
+                            </tr>
+
+                            <tr>
+                                <td>Réanimations</td>
+                                <td>{{ region.reanimation }}</td>
+                            </tr>
+
+                            <tr>
+                                <td>Guéris</td>
+                                <td>{{ region.gueris }}</td>
+                            </tr>
+
+                            <tr>
+                                <td>Nouvelles hospitalisations</td>
+                                <td>{{ region.nouvellesHospitalisations }}</td>
+                            </tr>
+
+                            <tr>
+                                <td>Nouvelles réanimations</td>
+                                <td>{{ region.nouvellesReanimations }}</td>
+                            </tr>
+
+                        </body>
+                    </table>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="container">
+        <h2 id="departement">Départements</h2>
+        <div class="row">
+            {% for departement in data.departements %}
+                <div class="col-lg-4 col-sm-6">
+                    <div class="card-body region">
+                        <a href={{ path('departement', {'departement' : departement.nom} )}}
+                            <h5 class="card-title">{{ departement.nom }}</h5>
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td>Hospitalisations</td>
+                                        <td>{{ departement.hospitalises }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Décès</td>
+                                        <td>{{ departement.deces }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Réanimations</td>
+                                        <td>{{ departement.reanimation }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Guéris</td>
+                                        <td>{{ departement.gueris }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Nouvelles hospitalisations</td>
+                                        <td>{{ departement.nouvellesHospitalisations }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Nouvelles réanimations</td>
+                                        <td>{{ departement.nouvellesReanimations }}</td>
+                                    </tr>
+
+                                </body>
+                            </table>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
