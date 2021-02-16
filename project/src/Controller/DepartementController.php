@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\CacheService;
 use App\Service\CallApiService;
 use Symfony\UX\Chartjs\Model\Chart;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +15,7 @@ class DepartementController extends AbstractController
     /**
      * @Route("/departement/{departement}", name="departement")
      */
-    public function index(string $departement, CallApiService $callApiService, ChartBuilderInterface $chartBuilder): Response
+    public function index(string $departement, CallApiService $callApiService, ChartBuilderInterface $chartBuilder, CacheService $cacheService): Response
     {
         $departs = $callApiService->getDataDepartement($departement);
         //dd($departs);
@@ -101,11 +102,13 @@ class DepartementController extends AbstractController
             ],
         ]);
 
-        return $this->render('departement/index.html.twig', [
+        $response = $this->render('departement/index.html.twig', [
             'departement' => $departement,
             'chartNvlHospitRea' => $chartNvlHospitRea,
             'chartDecesGueris' => $chartDecesGueris,
             'chartHospitRea' => $chartHospitRea
         ]);
+
+        return $cacheService->response($response);
     }
 }
